@@ -3,7 +3,7 @@
 //Dada la secuencia de palabras en el alfabeto alienigena, escribe una función que devuelva
 // verdadero si y solo si las palabras están ordenadas alfabéticamente en el alfabeto alienigena.
 
-let words = ["cono", "conocimiento"];
+let words = ["handlecomb", "handle", "smile"];
 const order = "hlabcdefgijkmnopqrstuvwxyz";
 
 //My Solution
@@ -18,40 +18,65 @@ function isAlienSorted(words, order) {
   }
 
   //Check if the words are sorted
+  function compareWords(word1, word2) {
+    let compareLength = Math.min(word1.length, word2.length)
 
-  let isSorted = true;
-
-  for (let i = 0; i < words.length - 1; i++) {
-    let isShorterFirst = true;
-    let word1 = words[i];
-    let word2 = words[i + 1];
-    let compareLength = Math.min(word1.length, word2.length);
-
-    if (word1.length > word2.length) {
-      isShorterFirst = false;
-    }
     for (let k = 0; k < compareLength; k++) {
-      let p1 = alphabet[word1[k]];
-      let p2 = alphabet[word2[k]];
+      let p1 = alphabet[word1[k]]
+      let p2 = alphabet[word2[k]]
 
       if (p1 < p2) {
-        isSorted = true;
-        break;
-      } else if (p1 > p2) {
-        isSorted = false;
-        break;
-      } else if (p1 === p2 && !isShorterFirst) {
-        isSorted = false;
+        return true
+      }
+      else if (p1 > p2) {
+        return false
       }
     }
-    if (!isSorted) {
-      break;
+    return word1.length <= word2.length
+
+  }
+
+  for (let i = 0; i < words.length - 1; i++) {
+    if (compareWords(words[i], words[i + 1]) === false) {
+      return false
     }
   }
-  console.log("response", isSorted);
-  return isSorted;
+  return true
 }
-isAlienSorted(words, order);
+
+// let isSorted = true;
+
+// for (let i = 0; i < words.length - 1; i++) {
+//   let isShorterFirst = true;
+//   let word1 = words[i];
+//   let word2 = words[i + 1];
+//   let compareLength = Math.min(word1.length, word2.length);
+
+//   if (word1.length > word2.length) {
+//     isShorterFirst = false;
+//   }
+//   for (let k = 0; k < compareLength; k++) {
+//     let p1 = alphabet[word1[k]];
+//     let p2 = alphabet[word2[k]];
+
+//     if (p1 < p2) {
+//       isSorted = true;
+//       break;
+//     } else if (p1 > p2) {
+//       isSorted = false;
+//       break;
+//     } else if (p1 === p2 && !isShorterFirst) {
+//       isSorted = false;
+//     }
+//   }
+//   if (!isSorted) {
+//     break;
+//   }
+// }
+// console.log("response", isSorted);
+// return isSorted;
+
+console.log("modularized", isAlienSorted(words, order));
 
 //Solution of Teacher
 var isAlienSorted2 = function (words, order) {
@@ -63,7 +88,7 @@ var isAlienSorted2 = function (words, order) {
 
   //Check the order of the words
   for (let i = 1; i < words.length; i++) { //T= O(n * longitud de la palabra mas larga) == O(n) ; S = O(m)
-    if ((comparar[words[i - 1]], words[i] == false)) {
+    if ((comparar(words[i - 1], words[i]) == false)) {
       return false;
     }
   }
@@ -84,3 +109,5 @@ let comparar = function (word1, word2) {
 };
 
 console.log(isAlienSorted2(words, order));
+
+
