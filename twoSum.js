@@ -33,18 +33,21 @@ let target = 6
 
 //This solution just works if the nums input is sorted
 function twoSum(nums, target) {
-    //
+    //Two pointers were created one at the begining and the other at the end of the array
     let left = 0;
     let right = nums.length - 1;
-
+    
     while (left < right) {
         let sum = nums[left] + nums[right];
+        //The left pointer moves to right if the sum is fewer than target
         if (sum < target) {
             left += 1
         }
+        //The right pointer moves to left if the sum greater than target
         else if (sum > target) {
             right -= 1
         }
+        //return the solution
         else {
             return [left, right]
         }
