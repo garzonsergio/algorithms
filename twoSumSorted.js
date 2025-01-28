@@ -28,29 +28,30 @@
 // -109 <= target <= 109
 // Only one valid answer exists.
 
-let nums = [2, 11, 7, 15]
-let target = 9
+let nums = [3, 2, 4]
+let target = 6
 
-
-//This solution doesn't care if have repeated numbers, or if is unsorted
-//but use a hashMap instead of two Pointers
-// O(n) 
-
+//This solution just works if the nums input is sorted
 function twoSum(nums, target) {
-
-    let numbersMap = new Map();
-
-    for (let i = 0; i < nums.length; i++) {
-        //While fills the hashMap is looking if was already saved a value that 
-        //complements with the current one, and return if is afirmative the case.
-        const complement = target - nums[i]
-        console.log(complement, nums[i],numbersMap.has(complement) )
-        if(numbersMap.has(complement)){
-            return [numbersMap.get(complement), i]
+    //Two pointers were created one at the begining and the other at the end of the array
+    let left = 0;
+    let right = nums.length - 1;
+    
+    while (left < right) {
+        let sum = nums[left] + nums[right];
+        //The left pointer moves to right if the sum is fewer than target
+        if (sum < target) {
+            left += 1
         }
-        numbersMap.set(nums[i], i)
+        //The right pointer moves to left if the sum greater than target
+        else if (sum > target) {
+            right -= 1
+        }
+        //return the solution
+        else {
+            return [left, right]
+        }
     }
-//As the array loops through the array just once time, the order is O(n)
 
 }
 
