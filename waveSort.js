@@ -13,7 +13,7 @@
 
 // wave_sort([1,2,6,19,12,3,1]) => [19,1,12,1,6,2,3]
 
-let array = [1, 2, 6, 19, 12, 3, 1];
+let array = [1, 1, 6, 19, 12, 3, 2];
 
 function waveSort(array) {
     let sortedArray = array.sort((a, b) => a - b) // O(n*log(n))
@@ -32,6 +32,37 @@ function waveSort(array) {
 
 // Complejidad final O(n*log(n))
 
-//TODO: Buscar una solución de orden O(n) para este problema
+//Segunda solución
+
+function waveSort2(array) {
+    let waveArray = [...array];
+
+
+    for (let i = 0; i < array.length - 1; i++) {
+        if (i % 2 === 0) {
+            if (waveArray[i] < waveArray[i + 1]) {
+                waveArray[i] = array[i + 1]
+                waveArray[i + 1] = array[i]
+            }
+
+        }
+        else {
+            if (waveArray[i] > waveArray[i + 1]) {
+                waveArray[i] = array[i + 1]
+                waveArray[i + 1] = array[i]
+
+            }
+
+        }
+
+    }
+
+    return waveArray
+}
+
+// Complejidad final O((n))
+
 
 console.log(waveSort(array))
+console.log(waveSort2(array))
+
